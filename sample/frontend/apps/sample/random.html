@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>{{i18n.Title}}</title>
+
+	<script type="module">
+		import { app_random } from "./components/app-random/app-random.mjs"; app_random.register();
+	</script>
+</head>
+
+<body>
+	
+	<h1>Random Page</h1>
+</body>
+<script>
+	fetch('http://localhost:9090/apis/message')
+	.then(response=>response.json())
+	.then((res)=>{
+		console.log(res)
+		document.getElementById('random-header').innerHTML = res.results.message
+	})
+	.catch((error)=>{
+		console.log(error)
+	})
+</script>
+
+</html>

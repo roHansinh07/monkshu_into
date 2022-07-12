@@ -1,0 +1,68 @@
+<!--
+(C) 2020 TekMonks. All rights reserved.
+License: MIT - see enclosed license.txt file.
+-->
+<!doctype html>
+    <html>
+
+        <head>
+            <meta charset="UTF-8">
+                <meta http-equiv="pragma" content="no-cache">
+                    <meta http-equiv="expires" content="-1">
+                        <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5
+                            maximum-scale=1.0">
+                            <title>Homepage</title>
+                            
+                            <!-- Include the monkshu framework -->
+                            <script type="text/javascript" src="/framework/js/$$.js"></script>
+                            </script>
+        </head>
+        <body>
+            <h1>New Blog</h1>
+            <a href="/apps/sample/blogs/Homepage.html">Get a blog</a>
+            <a href="/apps/sample/blogs/deleteBlog.html">Delete a blog</a>
+            <a href="/apps/sample/blogs/updateBlog.html">Update a blog</a><br><br>
+            <form >
+                <input  type="text" id="blogId" placeholder="Enter the ID of the blog" required><br><br>
+                <input  type="text" id="blogName" placeholder="Enter the Name of the blog" required>
+                <button id="buton">Create</button><br><br>
+            </form>
+            <div id="blogResults">
+            
+            </div>
+            
+            
+            
+            <script>
+
+                // Fetch the backend API for get blogs using id
+            
+                document.querySelector("#buton").addEventListener('click',async function(e){
+                    e.preventDefault();
+                    id = document.getElementById("blogId").value ;
+                    Name = document.getElementById("blogName").value ;
+                    if(id=='' || Name == ''){
+                        window.alert('Please Enter both the fields')
+                        window.location.replace("http://localhost:8080/apps/sample/blogs/newBlog.html");      
+                    }
+                    await fetch('http://localhost:9090/apis/createBlog',{
+                        method:"POST",
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body:JSON.stringify({
+                            "id":id,
+                            "name":Name
+                        })
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    })
+                    window.alert('The object is created :)')
+                    window.location.replace("http://localhost:8080/apps/sample/blogs/Homepage.html");      
+                
+                })
+            </script>  
+        </body>
+         
+    </html>

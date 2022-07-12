@@ -1,0 +1,97 @@
+<!--
+(C) 2020 TekMonks. All rights reserved.
+License: MIT - see enclosed license.txt file.
+-->
+<!doctype html>
+    <html>
+
+        <head>
+            <meta charset="UTF-8">
+                <meta http-equiv="pragma" content="no-cache">
+                    <meta http-equiv="expires" content="-1">
+                        <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5
+                            maximum-scale=1.0">
+                            <title>Homepage</title>
+                            
+                            <!-- Include the monkshu framework -->
+                            <script type="text/javascript" src="/framework/js/$$.js"></script>
+                            </script>
+        </head>
+        <body>
+            <h1>Pro Blogger</h1>
+            <a href="/apps/sample/blogs/newBlog.html">Create a new Blog</a>
+            <a href="/apps/sample/blogs/deleteBlog.html">Delete a blog</a>
+            <a href="/apps/sample/blogs/updateBlog.html">Update a blog</a><br><br>
+
+            <input  type="text" id="getBlog" placeholder="Enter the ID of the blog">
+            <button id="buton">Search</button><br><br>
+            <button id="allbuton">Get ALL Blogs</button>
+            <div id="blogResults">
+            
+            </div>
+            
+            
+            
+            <script>
+
+                // Fetch the backend API for get blogs using id
+
+
+                document.querySelector("#allbuton").addEventListener('click',async function(){
+                    await fetch('http://localhost:9090/apis/getBlog?'+ new URLSearchParams({
+                        "type":'secondary'
+                    }))
+                    .then(response =>response.json())
+                    .then((res)=>{
+                        console.log(res.blog.r)
+                        var vals = res.blog.r
+                        var main_div = document.getElementById("blogResults")
+                        main_div.innerHTML = ""
+                        for(var i=0;i<res.blog.r.length;i++){
+                            
+                            var div = document.createElement('div')
+                            var h = document.createElement('h2')
+                            h.innerHTML = "ID : "+vals[i].id
+                            var h2 = document.createElement('h2')
+                            h2.innerHTML = "Name : "+vals[i].name
+                            div.appendChild(h)
+                            div.appendChild(h2)
+                            div.style.marginTop = "10px";
+                            div.style.border = "2px solid black";
+                            main_div.appendChild(div)
+                        }
+                    })
+                
+                })
+                document.querySelector("#buton").addEventListener('click',async function(){
+                    id = document.getElementById("getBlog").value ;
+                    await fetch('http://localhost:9090/apis/getBlog?'+ new URLSearchParams({
+                        "id" : id,
+                        "type":'primary'
+                    }))
+                    .then(response =>response.json())
+                    .then((res)=>{
+                        console.log(res.blog.r)
+                        var vals = res.blog.r
+                        var main_div = document.getElementById("blogResults")
+                        main_div.innerHTML = ""
+                        for(var i=0;i<res.blog.r.length;i++){
+                            
+                            var div = document.createElement('div')
+                            var h = document.createElement('h2')
+                            h.innerHTML = "ID : "+vals[i].id
+                            var h2 = document.createElement('h2')
+                            h2.innerHTML = "Name : "+vals[i].name
+                            div.appendChild(h)
+                            div.appendChild(h2)
+                            div.style.marginTop = "10px";
+                            div.style.border = "2px solid black";
+                            main_div.appendChild(div)
+                        }
+                    })
+                
+                })
+            </script>  
+        </body>
+         
+    </html>

@@ -1,0 +1,13 @@
+{
+    "/apis/message": "/apis/message.js?get=true&needsToken=false&addsToken=sub:access",
+    "/apis/random": "/apis/random.js?get=true&key=Mk6DAu4beAzqD6I63Z1jRgQ5WTDa6zQO&needsToken=false",
+    "/":"/apis/homepage.js?get=true&needsToken=false",
+    "/apis/createBlog":"/apis/blogs/createBlog.js",
+    "/apis/updateBlog":"/apis/blogs/updateBlog.js",
+    "/apis/getBlog":"/apis/blogs/getBlogs.js?get=true&needsToken=false&addsToken=sub:access",
+    "/apis/deleteBlog":"/apis/blogs/deleteBlog.js"
+    
+
+    
+
+}
